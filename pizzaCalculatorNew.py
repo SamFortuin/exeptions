@@ -10,8 +10,25 @@ def main():
     except ValueError:
         print('not a number')
         main()
-    mediumPizzaAmount = int(input("How many medium pizza's do you want?\n"))
-    largePizzaAmount = int(input("How many large pizza's do you want?\n"))
+    # mediumPizzaAmount = int(input("How many medium pizza's do you want?\n"))
+    while True:
+        mediumPizzaAmount = input("How many medium pizza's do you want?\n")
+        try:
+            mediumPizzaAmount = int(mediumPizzaAmount)
+        except ValueError:
+            print('not a number')
+            continue
+        break
+    
+    while True:
+        largePizzaAmount = input("How many large pizza's do you want?\n")
+        try:
+            largePizzaAmount = int(largePizzaAmount)
+        except ValueError:
+            print("not a number")
+            continue
+        break
+    
     #prices in €, based on NYPizza
     pizzaPrices = [11.99, 13.99, 16.99]
     smallPizzaPrice, mediumPizzaPrice, largePizzaPrice = pizzaPrices
@@ -24,9 +41,9 @@ def main():
     
     #reciept
     stripe = '---------------------'
-    smallPizz = f"\n{smallPizzaAmount} small  pizza's totaling €{str(round(smallPizzaTotal,2)).replace('.',',')}" if smallPizzaAmount > 0 else ''
-    mediumPizz = f"\n{mediumPizzaAmount} medium  pizza's totaling €{str(round(mediumPizzaTotal,2)).replace('.',',')}" if mediumPizzaAmount > 0 else ''
-    largePizz = f"\n{largePizzaAmount} large  pizza's totaling €{str(round(largePizzaTotal,2)).replace('.',',')}" if largePizzaAmount > 0 else ''
+    smallPizz = f"\n{smallPizzaAmount} small  pizza's totaling €{str(round(smallPizzaTotal,2)).replace('.',',')}" if smallPizzaAmount > 0 else ""
+    mediumPizz = f"\n{mediumPizzaAmount} medium  pizza's totaling €{str(round(mediumPizzaTotal,2)).replace('.',',')}" if mediumPizzaAmount > 0 else ""
+    largePizz = f"\n{largePizzaAmount} large  pizza's totaling €{str(round(largePizzaTotal,2)).replace('.',',')}" if largePizzaAmount > 0 else ""
     
     print(f"{stripe}\n     Your order:\n{stripe}{smallPizz}{mediumPizz}{largePizz}\
     \n{stripe}\nOrder total:  €{str(round(totalPrice,2)).replace('.',',')}\n{stripe}\n")
@@ -40,6 +57,7 @@ def main():
         main()
     elif restart == "n":
         print("Thank you for using the calculator. program will now exit")
+        exit()
     else:
         print('a')
 
