@@ -1,5 +1,4 @@
 #99059050, Sam Fortuin
-import time
 
 #vars
 #place holder strings for list
@@ -13,42 +12,57 @@ hairReqPassed = False
 compReqPassed = False
 
 #user input for correct compitence & physical list info
-personPhysical[0] = input("Wat is uw naam?\n")
-personCompitence[0] = input("In welk veld heeft u praktijkervaaring\n")
-#cleanup for later if statement
-personCompitence[0] = personCompitence[0].lower().replace(" ", "").replace("-","")
-personCompitence[1] = int(input("Hoeveel jaar praktijkervaaring heeft u?\n"))
-distractions[0] = input("Heeft u de cursus clown ethiek gevolgd?\n")
+personPhysical[0] = input("Wat is uw naam?\n").lower()
+if personPhysical[0] == "janice":
+    raise NameError('We hebben al een Janice')
+personCompitence[0] = input("In welk veld heeft u praktijkervaaring\n").lower().replace(" ", "").replace("-","")
+while True:
+    personCompitence[1] = input("Hoeveel jaar praktijkervaaring heeft u?\n")
+    try:
+        personCompitence[1] = int(personCompitence[1])
+    except ValueError:
+        print('niet een nummer')
+        continue
+    break
+distractions[0] = input("Heeft u de cursus clown ethiek gevolgd?\n")[:1].replace('j','y')
+if distractions[0] != 'y':
+    raise Exception('Niet ethisch genoeg')
 personCompitence[2] = input("Heeft u een MBO Niveau 4 diploma?\n")
 personCompitence[3] = input("Heeft u een rijbeweijs D?\n")
-distractions[3] = input("Heeft u ooit een Legend of Zelda game gespeeld?\n")
+distractions[3] = input("Heeft u ooit een Legend of Zelda game gespeeld?\n")[:1].replace("j",'y')
+if distractions[3] != 'y':
+    raise Exception('U bent hier niet welkom!')
 personCompitence[4] = input("Bent u in bezit van een hoge hoed?\n")
-personPhysical[1] = input("Wat is uw geslacht?\n")
+personPhysical[1] = input("Wat is uw geslacht?\n").lower()[:1].replace('f','v')
 distractions[2] = input("Heeft u ooit geluistered naar eminem?\n")
-#lower for if statement
-personPhysical[1] = personPhysical[1].lower()
-
-if personPhysical[1] == "man" or personPhysical[1] == "m":
-    personPhysical[2] = input("Heeft u een snor?\n")
-    personPhysical[2] = personPhysical[2].lower()
-    if personPhysical[2] == "ja" or personPhysical[2] == "j":
-        personPhysical[3] = input("Wat is de lengte van uw snor in centimeters?\n")
-        #cleans up input for int conversion
-        personPhysical[3] = personPhysical[3].lower().replace("cm","").replace(" ","")
-        personPhysical[3] = int(personPhysical[3])
+if personPhysical[1] == "m":
+    personPhysical[2] = input("Heeft u een snor?\n")[:1].lower().replace('j','y')
+    if personPhysical[2] == 'y':
+        while True:
+            personPhysical[3] = input("Wat is de lengte van uw snor in centimeters?\n")[:2]
+            try:
+                personPhysical[3] = int(personPhysical[3])
+            except ValueError:
+                print('not a number')
+                continue
+            break
         if personPhysical[3] >= 10:
             hairReqPassed = True
         else:
             hairReqPassed = False
     else:
         physicalReqPassed = False
-elif personPhysical[1] == "vrouw" or personPhysical[1] == "v":
-    personPhysical[3] = input("Wat is de lengte van uw haar in centimeters?\n")
-    personPhysical[2] = input("Wat is uw haarkleur en haartype\n")
-    #cleanup for if statement
-    personPhysical[2] = personPhysical[2].lower().replace("haar","").replace(" ","")
-    personPhysical[3] = personPhysical[3].lower().replace("cm","").replace(" ","")
-    personPhysical[3] = int(personPhysical[3])
+elif personPhysical[1] == "v":
+    while True:
+        personPhysical[3] = input("Wat is de lengte van uw haar in centimeters?\n")[:3].replace('c','').replace(" ","")
+        try:
+            personPhysical[3] = int(personPhysical[3])
+        except ValueError:
+            print('not a number')
+            continue
+        break
+    personPhysical[2] = input("Wat is uw haarkleur en haartype\n").lower().replace("haar","").replace(" ","")
+    
     if personPhysical[2] == "roodkrul" and personPhysical[3] >= 20:
         hairReqPassed = True
     else:
@@ -56,11 +70,16 @@ elif personPhysical[1] == "vrouw" or personPhysical[1] == "v":
 else:
     physicalReqPassed = False
 
-personPhysical[4] = input("Wat is uw lengte in centimeters\n")
-personPhysical[4] = personPhysical[4].lower().replace("cm","").replace(" ","")
-personPhysical[4] = int(personPhysical[4])
+while True:
+    personPhysical[4] = input("Wat is uw lengte in centimeters\n")[:3]
+    try:
+        personPhysical[4] = int(personPhysical[4])
+    except ValueError:
+        print('not a number')
+        continue
+    break
 distractions[2] = input("Wat is de lengte van uw linker grote teen?\n")
-personPhysical[5] = int(input("Wat is ue gewicht in kilo's?\n"))
+personPhysical[5] = int(input("Wat is uw gewicht in kilo's?\n"))
 personCompitence[5] = input("Heeft u het certificaat Overleven met gevaarlijk personeel?\n")
 
 #if statement for physicalReq
@@ -77,10 +96,6 @@ else:
 
 #final if statement
 if physicalReqPassed == True and compReqPassed == True:
-    print(personPhysical[0],"u bent geaccepteerd voor een solicitatie gesprek met meneer E.X. Directeaur")
-    time.sleep(0.2)
-    exit()
+    print(f'{personPhysical[0]} u bent geaccepteerd voor een solicitatie gesprek met meneer E.X. Directeaur')
 else:
-    print(personPhysical[0],"u bent niet geaccepteerd voor een solicitatie gesprek")
-    time.sleep(0.2)
-    exit()
+    print(f'{personPhysical[0]} u bent niet geaccepteerd voor een solicitatie gesprek')
