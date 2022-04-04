@@ -6,6 +6,4 @@ from unicodedata import digit
 personCompitence = '4'
 
 if __name__ == '__main__':
-    a = digit(personCompitence)
-    print(a)
-    
+    a = '1'
