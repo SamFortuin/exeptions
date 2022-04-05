@@ -7,6 +7,9 @@ def main():
     smallPizzaAmount = input("How many small pizza's do you want?\n")
     try:
         smallPizzaAmount = int(smallPizzaAmount)
+        if smallPizzaAmount < 0:
+            print("negative numbers are not allowed")
+            main()
     except ValueError:
         print('not a number')
         main()
@@ -15,6 +18,9 @@ def main():
         mediumPizzaAmount = input("How many medium pizza's do you want?\n")
         try:
             mediumPizzaAmount = int(mediumPizzaAmount)
+            if mediumPizzaAmount < 0:
+                print("negative numbers are not allowed")
+                continue
         except ValueError:
             print('not a number')
             continue
@@ -24,6 +30,9 @@ def main():
         largePizzaAmount = input("How many large pizza's do you want?\n")
         try:
             largePizzaAmount = int(largePizzaAmount)
+            if largePizzaAmount < 0:
+                print('negative numbers not allowed')
+                continue
         except ValueError:
             print("not a number")
             continue

@@ -1,8 +1,6 @@
 #99059050, Sam Fortuin
 
-#vars
-#place holder strings for list
-
+#global vars
 personCompitence = ["0_praktijkErvaaring", "1_praktijkEvaringTijd", "2_mbo4", "3_truckLicense", "4_ownsTopHat", "5_certificate"]
 personPhysical = ["0_name", "1_gender", "2_hairTypeOrMustache", "3_hairLength", "4_height", "5_weight"]
 distractions = ["0_clownEthics", "1_toeLength", "2_eminem", "3_zelda"]
@@ -80,11 +78,18 @@ while True:
         continue
     break
 distractions[2] = input("Wat is de lengte van uw linker grote teen?\n")
-personPhysical[5] = int(input("Wat is uw gewicht in kilo's?\n"))
+while True:
+    personPhysical[5] = input("Wat is uw gewicht in kilo's?\n")
+    try:
+        personPhysical[5] = int(personPhysical[5])
+    except ValueError:
+        print("not a number")
+        continue
+    break
 personCompitence[5] = input("Heeft u het certificaat Overleven met gevaarlijk personeel?\n")
 
 #if statement for physicalReq
-if personPhysical[4] >= 180 and personPhysical[5] >= 90 and hairReqPassed == True:
+if personPhysical[4] >= 180 and personPhysical[5] >= 90 and hairReqPassed:
     physicalReqPassed = True
 else:
     physicalReqPassed = False
@@ -96,7 +101,7 @@ else:
     compReqPassed = False
 
 #final if statement
-if physicalReqPassed == True and compReqPassed == True:
+if physicalReqPassed and compReqPassed:
     print(f'{personPhysical[0]} u bent geaccepteerd voor een solicitatie gesprek met meneer E.X. Directeaur')
 else:
     print(f'{personPhysical[0]} u bent niet geaccepteerd voor een solicitatie gesprek')
